@@ -1,3 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply box-border m-0 p-0;
+  font-family: "Rubik";
+}
+
+.main-heading {
+  @apply font-semibold text-5xl pb-5 md:text-7xl;
+  background: -webkit-linear-gradient(#c0a7c2, #4b2255);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-button {
+  @apply py-[6px] px-[25px] text-white rounded-[4px] border-none bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] hover:shadow-lg;
+}

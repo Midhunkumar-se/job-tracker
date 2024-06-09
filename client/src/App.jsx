@@ -1,7 +1,8 @@
 import React from "react";
+import Landing from "./pages/Landing";
 
 const App = () => {
-  return <div className="text-red-600">App</div>;
+  return <Landing />;
 };
 
 export default App;
