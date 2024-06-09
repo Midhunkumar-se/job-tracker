@@ -1,8 +1,19 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import sideImage from "../assets/side-img.png";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  let nav = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    nav("/login");
+  };
+  const handleRegister = (e) => {
+    e.preventDefault();
+    nav("/register");
+  };
+
   return (
     <header className="h-screen bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)]">
       <div className="max-w-[1200px] m-auto p-2.5 pl-10">
@@ -21,11 +32,19 @@ const Landing = () => {
             dream job.
           </p>
           <div className="flex flex-row items-center mt-6 ">
-            <button className="purple-button" type="button">
+            <button
+              className="purple-button"
+              type="button"
+              onClick={handleRegister}
+            >
               Register
             </button>
             <p className="font-semibold px-3 text-4xl text-[#4b2255]">/</p>
-            <button className="purple-button" type="button">
+            <button
+              className="purple-button"
+              type="button"
+              onClick={handleLogin}
+            >
               Login
             </button>
           </div>
