@@ -1,10 +1,13 @@
 import express from "express";
 import connectDB from "./db/connect.js";
 import dotenv from "dotenv";
+import userRoutes from "./routes/user.route.js";
 
 dotenv.config();
 
 const app = express();
+
+app.use("/api/user", userRoutes);
 
 const start = async () => {
   try {
