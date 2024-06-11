@@ -1,7 +1,21 @@
 import express from "express";
+import connectDB from "./db/connect.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO);
+    console.log("MongoDB is connected");
+    app.listen(3000, () => {
+      console.log("Server is running own port 3000");
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
