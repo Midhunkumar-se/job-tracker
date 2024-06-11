@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
@@ -32,6 +31,11 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.pre("save", async function () {
+  const salt = await bcryptjs.genSalt(10);
+  this.password = await bcryptjs.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 

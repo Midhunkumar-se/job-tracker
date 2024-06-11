@@ -2,12 +2,17 @@ import express from "express";
 import connectDB from "./db/connect.js";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
+import authRoutes from "./routes/auth.route.js";
+import "express-async-errors";
 
 dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 
 const start = async () => {
   try {
