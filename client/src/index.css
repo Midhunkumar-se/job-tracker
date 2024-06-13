@@ -19,3 +19,7 @@
 .purple-button {
   @apply py-[6px] px-[25px] text-white rounded-[4px] border-none bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] hover:shadow-lg;
 }
+
+.box-shadow-1 {
+  @apply shadow-[rgba(149,157,165,0.2)_0px_8px_24px];
+}
