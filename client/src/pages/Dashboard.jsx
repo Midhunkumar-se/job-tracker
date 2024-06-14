@@ -1,7 +1,8 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Dashboard = () => {
-  return <h1 className="text-center font-semibold text-[25px]">Dashboard</h1>;
+  return <Header />;
 };
 
 export default Dashboard;
