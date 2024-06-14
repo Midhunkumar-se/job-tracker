@@ -1,7 +1,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import logo from "../assets/logo.png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,15 +9,11 @@ import {
   loginStart,
   loginSuccess,
 } from "../redux/user/userSlice.js";
+import OAuth from "../components/OAuth.jsx";
 
 function Login() {
   const [formData, setFormData] = useState({});
-  const {
-    loading,
-    error: errorMessage,
-    currentUser,
-  } = useSelector((state) => state.user);
-  console.log(currentUser);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +21,10 @@ function Login() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
+
+  useEffect(() => {
+    dispatch(loginFailure(null));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,9 +50,9 @@ function Login() {
       dispatch(loginFailure(data.message));
     }
   };
-
+  console.log(errorMessage);
   return (
-    <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[80px] flex flex-col  items-center">
+    <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[60px] flex flex-col  items-center">
       <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[320px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
         <Link to="/" className="self-center mb-3">
           <img src={logo} className="w-[170px] h-[30px]" />
@@ -83,7 +83,7 @@ function Login() {
           <Button
             gradientDuoTone="purpleToPink"
             type="submit"
-            className="rounded-md"
+            className="rounded-[3px]"
             disabled={loading}
           >
             {loading ? (
@@ -95,17 +95,20 @@ function Login() {
               "Login"
             )}
           </Button>
+          <OAuth />
         </form>
         <div className="flex gap-2 text-sm mt-5">
-          <span>Dont Have an account?</span>
+          <span>Don't Have an account?</span>
           <Link to="/register" className="text-blue-500">
             Register
           </Link>
         </div>
-        {errorMessage && (
+        {errorMessage ? (
           <Alert className="mt-5" color="failure">
             {errorMessage}
           </Alert>
+        ) : (
+          <></>
         )}
       </div>
     </div>

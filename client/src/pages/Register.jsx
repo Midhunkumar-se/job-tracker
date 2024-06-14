@@ -3,6 +3,7 @@ import logo from "../assets/logo.png";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 function Register() {
   const [formData, setFormData] = useState({});
@@ -45,7 +46,7 @@ function Register() {
   };
 
   return (
-    <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[80px] flex flex-col  items-center">
+    <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[60px] flex flex-col  items-center">
       <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[320px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
         <Link to="/" className="self-center mb-3">
           <img src={logo} className="w-[170px] h-[30px]" />
@@ -85,7 +86,7 @@ function Register() {
           <Button
             gradientDuoTone="purpleToPink"
             type="submit"
-            className="rounded-md"
+            className="rounded-[3px]"
             disabled={loading}
           >
             {loading ? (
@@ -97,6 +98,7 @@ function Register() {
               "Register"
             )}
           </Button>
+          <OAuth />
         </form>
         <div className="flex gap-2 text-sm mt-5">
           <span>Have an account?</span>

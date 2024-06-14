@@ -5,6 +5,7 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import "express-async-errors";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
+import notFound from "./middleware/not-found.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use(errorHandlerMiddleware);
+app.use(notFound);
 
 const start = async () => {
   try {
