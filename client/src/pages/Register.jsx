@@ -46,13 +46,13 @@ function Register() {
 
   return (
     <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[80px] flex flex-col  items-center">
-      <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[350px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
+      <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[320px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
         <Link to="/" className="self-center mb-3">
           <img src={logo} className="w-[170px] h-[30px]" />
         </Link>
         <div className="relative flex flex-col items-center mb-4">
           <h1 className="text-[30px] font-medium mb-[0px]">Register</h1>
-          <div className="absolute bottom-0 left-20 ml-1 h-[4px] w-[30px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
+          <div className="absolute bottom-0 left-10 ml-[30px] h-[4px] w-[30px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
         </div>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>

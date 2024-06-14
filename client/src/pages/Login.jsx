@@ -3,23 +3,36 @@ import logo from "../assets/logo.png";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+} from "../redux/user/userSlice.js";
 
 function Login() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const {
+    loading,
+    error: errorMessage,
+    currentUser,
+  } = useSelector((state) => state.user);
+  console.log(currentUser);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage("Please fill out all fields.");
+      dispatch(loginFailure("Please fill out all fields."));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(loginStart());
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,28 +40,26 @@ function Login() {
       });
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        return setErrorMessage(data.message);
+        dispatch(loginFailure(data.message));
       }
-      setLoading(false);
       if (res.ok) {
+        dispatch(loginSuccess(data));
         navigate("/dashboard");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      dispatch(loginFailure(data.message));
     }
   };
 
   return (
     <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[80px] flex flex-col  items-center">
-      <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[350px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
+      <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[320px] shadow-2xl rounded-md border-t-[6px] border-purple-950">
         <Link to="/" className="self-center mb-3">
           <img src={logo} className="w-[170px] h-[30px]" />
         </Link>
         <div className="relative flex flex-col items-center mb-4">
           <h1 className="text-[30px] font-medium mb-[0px]">Login</h1>
-          <div className="absolute bottom-0 left-20 ml-[26px] h-[4px] w-[25px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
+          <div className="absolute bottom-0 left-20 ml-[11px] h-[4px] w-[25px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
         </div>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>
