@@ -50,7 +50,7 @@ function Login() {
       dispatch(loginFailure(data.message));
     }
   };
-  console.log(errorMessage);
+
   return (
     <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#e1d5e0)] h-lvh pt-[60px] flex flex-col  items-center">
       <div className="bg-[linear-gradient(to_bottom_left,#ffffff,#F6E8FF)] flex flex-col justify-center p-[30px] w-[320px] shadow-2xl rounded-md border-t-[6px] border-purple-950">

@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import BadRequestError from "../errors/bad-request.js";
 import UnauthenticatedError from "../errors/unauthenticated.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   try {
