@@ -30,12 +30,10 @@ function Header() {
   return (
     <Navbar className="shadow-sm">
       <Link to="/">
-        <div className="max-w-[1200px] m-auto p-2.5 pl-10">
+        <div className="max-w-[1200px] m-auto p-2.5 pl-5">
           <img src={logo} className="w-[170px] h-[30px]" />
         </div>
       </Link>
-
-      <h1 className="text-center font-medium text-[25px]">Dashboard</h1>
 
       <div className="flex gap-2 md:order-2">
         <Dropdown
@@ -57,8 +55,6 @@ function Header() {
           </Dropdown.Header>
           <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
         </Dropdown>
-
-        <Navbar.Toggle />
       </div>
     </Navbar>
   );
