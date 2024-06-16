@@ -44,7 +44,7 @@ function Login() {
       }
       if (res.ok) {
         dispatch(loginSuccess(data));
-        navigate("/dashboard");
+        navigate("/dashboard?tab=profile");
       }
     } catch (error) {
       dispatch(loginFailure(data.message));

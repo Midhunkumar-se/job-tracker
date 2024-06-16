@@ -28,7 +28,7 @@ export default function OAuth() {
       const data = await res.json();
       if (res.ok) {
         dispatch(loginSuccess(data));
-        navigate("/dashboard");
+        navigate("/dashboard?tab=profile");
       }
     } catch (error) {
       dispatch(loginFailure(error.message));
