@@ -2,6 +2,7 @@
 
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiUser } from "react-icons/hi";
+import { FaWpforms } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -43,6 +44,11 @@ export default function DashSidebar() {
     <Sidebar className="w-full lg:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
+          <Link to="/dashboard?tab=addJob">
+            <Sidebar.Item active={tab === "addJob"} icon={FaWpforms} as="div">
+              Add Job
+            </Sidebar.Item>
+          </Link>
           <Link to="/dashboard?tab=profile">
             <Sidebar.Item
               active={tab === "profile"}
