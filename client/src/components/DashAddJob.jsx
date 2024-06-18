@@ -3,7 +3,7 @@ import { Button, FileInput, Label, Select, TextInput } from "flowbite-react";
 function DashAddJob() {
   return (
     <div className="p-12 w-full h-screen ">
-      <div className="p-5 shadow-lg bg-white rounded-md bg-[linear-gradient(to_bottom_left,#F5E9F7,#ffffff)]">
+      <div className="p-5 pb-8 shadow-lg bg-white rounded-md bg-[linear-gradient(to_bottom_left,#F5E9F7,#ffffff)]">
         <div className="flex flex-col mb-7">
           <h1 className="text-[27px] p-0 m-0 font-medium">Add Job</h1>
           <div className="h-[4px] w-[25px] p-0 m-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
