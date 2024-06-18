@@ -38,7 +38,7 @@ function DashAddJob() {
           jobStatus: "pending",
           jobType: "full-time",
         });
-        navigate("/dashboard?tab=addJob");
+        navigate("/dashboard?tab=allJobs");
       }
     } catch (error) {
       toast.error(error.message);
