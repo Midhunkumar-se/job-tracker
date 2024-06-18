@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import IsLoggedIn from "./components/IsLoggedIn";
 import ErrorPage from "./pages/Error";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -22,6 +24,19 @@ const App = () => {
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
     </BrowserRouter>
   );
 };
