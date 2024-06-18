@@ -3,6 +3,7 @@ import connectDB from "./db/connect.js";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import jobRoutes from "./routes/job.route.js";
 import "express-async-errors";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFound from "./middleware/not-found.js";
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/job", jobRoutes);
 
 app.use(errorHandlerMiddleware);
 app.use(notFound);

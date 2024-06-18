@@ -64,7 +64,7 @@ function DashAddJob() {
             <select className="flex-1 border-2 border-gray-300 bg-gray-50 rounded-[4px] p-[6px] outline-none focus:border-purple-900 focus:outline-none">
               <option value="pending">Pending</option>
               <option value="interview">Interview</option>
-              <option value="decline">Decline</option>
+              <option value="declined">Declined</option>
             </select>
           </div>
           <div className="w-full flex flex-col">
