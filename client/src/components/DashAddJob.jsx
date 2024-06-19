@@ -49,7 +49,7 @@ function DashAddJob() {
     const { value, id } = event.target;
     setFormData({
       ...formData,
-      [id]: value,
+      [id]: value.trim(),
     });
   };
 

@@ -36,6 +36,7 @@ function DashAllJobs() {
               id="jobStatus"
               className="flex-1 border-2 border-gray-300 bg-gray-50 rounded-[4px] p-[6px] outline-none focus:border-purple-900 focus:outline-none"
             >
+              <option value="all">All</option>
               <option value="pending">Pending</option>
               <option value="interview">Interview</option>
               <option value="declined">Declined</option>
@@ -53,6 +54,7 @@ function DashAllJobs() {
               id="jobType"
               className="flex-1 border-2 border-gray-300 bg-gray-50 rounded-[4px] p-[6px] outline-none focus:border-purple-900 focus:outline-none"
             >
+              <option value="all">All</option>
               <option value="full-time">Full Time</option>
               <option value="part-time">Part Time</option>
               <option value="internship">Internship</option>
@@ -72,8 +74,8 @@ function DashAllJobs() {
             >
               <option value="newest">newest</option>
               <option value="oldest">oldest</option>
-              <option value="ascending">a-z</option>
-              <option value="descending">z-a</option>
+              <option value="a-z">a-z</option>
+              <option value="z-a">z-a</option>
             </select>
           </div>
 
