@@ -165,13 +165,13 @@ function DashAllJobs() {
         <h1 className="text-lg font-medium mb-5">
           {jobs.totalJobs} Jobs Found
         </h1>
-        <div className="grid grid-cols-1 gap-8 mb-10 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 mb-10 lg:grid-cols-2">
           {loading ? (
-            <div className="flex w-full justify-center">
+            <div className="flex w-full justify-end">
               <Spinner className="h-10 w-10" />
             </div>
           ) : jobs.totalJobs === 0 ? (
-            <div className="text-center">
+            <div className="text-end">
               <h1 className="font-medium text-xl">
                 No jobs available at the moment.
               </h1>

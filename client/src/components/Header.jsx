@@ -35,6 +35,10 @@ function Header() {
         </div>
       </Link>
 
+      <h1 className="text-center font-medium text-[25px] hidden md:block">
+        Dashboard
+      </h1>
+
       <div className="flex gap-2 md:order-2">
         <Dropdown
           arrowIcon={false}

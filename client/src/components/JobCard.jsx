@@ -23,8 +23,8 @@ const JobCard = (props) => {
           <p className="text-slate-500 text-[15px]">{company}</p>
         </div>
       </div>
-      <div className="flex p-5 ">
-        <div className="flex flex-col mr-[100px]">
+      <div className="flex p-5 max-w-[380px] justify-between">
+        <div className="flex flex-col">
           <div className="flex items-center rounded-full bg-slate-100 pr-3 mb-5">
             <div className="rounded-full p-2 bg-pink-100">
               <FaLocationArrow className="text-black p-0 m-0 text-[14px]" />
