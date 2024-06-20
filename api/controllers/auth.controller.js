@@ -46,10 +46,13 @@ export const login = async (req, res, next) => {
 
     const { password: pass, ...rest } = user._doc;
 
+    const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
     res
       .status(200)
       .cookie("access_token", token, {
         httpOnly: true,
+        expires: expires,
       })
       .json(rest);
   } catch (error) {
@@ -70,10 +73,12 @@ export const google = async (req, res, next) => {
         }
       );
       const { password, ...rest } = user._doc;
+      const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
       res
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          expires: expires,
         })
         .json(rest);
     } else {
@@ -92,10 +97,12 @@ export const google = async (req, res, next) => {
       const token = newUser.createJWT();
 
       const { password: pass, ...rest } = newUser._doc;
+      const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
       res
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          expires: expires,
         })
         .json(rest);
     }

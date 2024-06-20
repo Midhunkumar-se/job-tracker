@@ -42,7 +42,7 @@ export default function DashSidebar() {
   };
 
   return (
-    <Sidebar className="w-full lg:w-56">
+    <Sidebar className="w-full lg:w-56 h-full">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
           <Link to="/dashboard?tab=addJob">

@@ -23,3 +23,15 @@
 .box-shadow-1 {
   @apply shadow-[rgba(149,157,165,0.2)_0px_8px_24px];
 }
+.box-shadow-2 {
+  @apply shadow-[rgba(99,99,99,0.2)_0px_2px_8px_0px];
+}
+.declined {
+  @apply bg-red-200 text-red-800;
+}
+.pending {
+  @apply bg-yellow-200 text-yellow-800;
+}
+.interview {
+  @apply bg-purple-200 text-purple-950;
+}
