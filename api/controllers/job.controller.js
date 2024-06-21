@@ -78,7 +78,32 @@ export const deleteJob = async (req, res, next) => {
     }
 
     await Job.findByIdAndDelete(req.params.jobId);
-    res.status(200).json({ msg: "job deleted" });
+    res.status(StatusCodes.OK).json({ msg: "job deleted" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateJob = async (req, res, next) => {
+  try {
+    if (req.user.id !== req.params.userId) {
+      throw new ForbiddenError("You are not allowed to update this post");
+    }
+
+    const updatedJob = await Job.findByIdAndUpdate(
+      req.params.jobId,
+      {
+        $set: {
+          company: req.body.company,
+          position: req.body.position,
+          jobLocation: req.body.jobLocation,
+          jobStatus: req.body.jobStatus,
+          jobType: req.body.jobType,
+        },
+      },
+      { new: true }
+    );
+    res.status(StatusCodes.OK).json({ msg: "job modified", job: updatedJob });
   } catch (error) {
     next(error);
   }
