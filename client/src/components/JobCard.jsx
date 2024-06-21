@@ -4,6 +4,7 @@ import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 day.extend(advancedFormat);
 
 const JobCard = (props) => {
@@ -68,9 +69,11 @@ const JobCard = (props) => {
         </div>
       </div>
       <div className="flex p-5 pt-3">
-        <button className="text-[12px] text-white border-none rounded-sm bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] px-5 py-[5px] mr-2">
-          Edit
-        </button>
+        <Link to={`/dashboard/?tab=updateJob&updateJobId=${_id}`}>
+          <button className="text-[12px] text-white border-none rounded-sm bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] px-5 py-[5px] mr-2">
+            Edit
+          </button>
+        </Link>
         <button
           onClick={() => {
             setShowModal(true);
