@@ -1,9 +1,12 @@
 import { Button } from "flowbite-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function DashUpdateJob() {
+  const { currentUser } = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({
     position: "",
     company: "",
@@ -12,18 +15,50 @@ function DashUpdateJob() {
     jobType: "full-time",
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const jobId = searchParams.get("updateJobId");
+
+  useEffect(() => {
+    try {
+      const fetchJob = async () => {
+        if (jobId) {
+          const res = await fetch(
+            `/api/job/getJob/${jobId}/${currentUser._id}`
+          );
+          const data = await res.json();
+          if (!res.ok) {
+            console.log(data.message);
+            toast.error(data.message);
+            return;
+          }
+          if (res.ok) {
+            setFormData(data.job);
+          }
+        } else {
+          return;
+        }
+      };
+      fetchJob();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, [jobId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/job/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `/api/job/updateJob/${jobId}/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         toast.error(data.message);
@@ -31,13 +66,6 @@ function DashUpdateJob() {
       }
       if (res.ok) {
         toast.success(data.msg);
-        setFormData({
-          position: "",
-          company: "",
-          jobLocation: "",
-          jobStatus: "pending",
-          jobType: "full-time",
-        });
         navigate("/dashboard?tab=allJobs");
       }
     } catch (error) {

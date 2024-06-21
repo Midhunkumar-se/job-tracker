@@ -4,6 +4,7 @@ import {
   createJob,
   deleteJob,
   getAllJobs,
+  getJob,
   updateJob,
 } from "../controllers/job.controller.js";
 
@@ -11,6 +12,7 @@ const router = express.Router();
 
 router.post("/create", verifyToken, createJob);
 router.get("/getAllJobs", verifyToken, getAllJobs);
+router.get("/getJob/:jobId/:userId", verifyToken, getJob);
 router.delete("/deleteJob/:jobId/:userId", verifyToken, deleteJob);
 router.put("/updateJob/:jobId/:userId", verifyToken, updateJob);
 

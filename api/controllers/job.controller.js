@@ -108,3 +108,18 @@ export const updateJob = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getJob = async (req, res, next) => {
+  try {
+    if (req.user.id !== req.params.userId) {
+      throw new ForbiddenError("You are not allowed to update this post");
+    }
+
+    console.log(req.params.jobId, req.params.userId);
+
+    const job = await Job.findOne({ _id: req.params.jobId });
+    res.status(StatusCodes.OK).json({ job });
+  } catch (error) {
+    next(error);
+  }
+};
