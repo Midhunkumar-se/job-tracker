@@ -2,6 +2,8 @@ import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import JobCard from "./JobCard";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function DashAllJobs() {
   const [filterData, setFilterData] = useState({
@@ -12,6 +14,8 @@ function DashAllJobs() {
     page: 1,
   });
 
+  const { currentUser } = useSelector((state) => state.user);
+
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginationNums, setPaginationNums] = useState({
@@ -19,31 +23,32 @@ function DashAllJobs() {
     end: null,
   });
 
+  const fetchJobs = async () => {
+    setLoading(true);
+    const searchQuery = `search=${filterData.search}&jobStatus=${filterData.jobStatus}&jobType=${filterData.jobType}&sort=${filterData.sort}&page=${filterData.page}`;
+    const res = await fetch(`/api/job/getAllJobs?${searchQuery}`);
+    if (!res.ok) {
+      setLoading(false);
+      return;
+    }
+    if (res.ok) {
+      const data = await res.json();
+      setJobs(data);
+
+      setPaginationNums({
+        start: data.currentPage * 5 - 5 + 1,
+        end:
+          data.currentPage * 5 > data.totalJobs
+            ? data.totalJobs
+            : data.currentPage * 5,
+      });
+
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const searchQuery = `search=${filterData.search}&jobStatus=${filterData.jobStatus}&jobType=${filterData.jobType}&sort=${filterData.sort}&page=${filterData.page}`;
-      const res = await fetch(`/api/job/getAllJobs?${searchQuery}`);
-      if (!res.ok) {
-        setLoading(false);
-        return;
-      }
-      if (res.ok) {
-        const data = await res.json();
-        setJobs(data);
-
-        setPaginationNums({
-          start: data.currentPage * 5 - 5 + 1,
-          end:
-            data.currentPage * 5 > data.totalJobs
-              ? data.totalJobs
-              : data.currentPage * 5,
-        });
-
-        setLoading(false);
-      }
-    };
-    fetchPosts();
+    fetchJobs();
   }, [filterData]);
 
   const handleChange = (e) => {
@@ -94,6 +99,26 @@ function DashAllJobs() {
       }));
     } else {
       return;
+    }
+  };
+
+  const handleDeleteJob = async (jobIdToDelete) => {
+    try {
+      const res = await fetch(
+        `/api/job/deleteJob/${jobIdToDelete}/${currentUser._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(error.message);
+      } else {
+        fetchJobs();
+        toast.success(data.msg);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -214,7 +239,13 @@ function DashAllJobs() {
             </div>
           ) : (
             jobs.jobs?.map((data) => {
-              return <JobCard key={data._id} jobData={data} />;
+              return (
+                <JobCard
+                  key={data._id}
+                  jobData={data}
+                  deleteJob={handleDeleteJob}
+                />
+              );
             })
           )}
         </div>
