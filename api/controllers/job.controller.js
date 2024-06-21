@@ -1,4 +1,5 @@
 import BadRequestError from "../errors/bad-request.js";
+import ForbiddenError from "../errors/forbidden.js";
 import Job from "../models/job.model.js";
 import { StatusCodes } from "http-status-codes";
 
@@ -65,6 +66,19 @@ export const createJob = async (req, res, next) => {
     const job = await newJob.save();
 
     res.status(StatusCodes.CREATED).json({ msg: "Job Created", job });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteJob = async (req, res, next) => {
+  try {
+    if (req.user.id !== req.params.userId) {
+      throw new ForbiddenError("You are not allowed to delete this job");
+    }
+
+    await Job.findByIdAndDelete(req.params.jobId);
+    res.status(200).json({ msg: "job deleted" });
   } catch (error) {
     next(error);
   }
