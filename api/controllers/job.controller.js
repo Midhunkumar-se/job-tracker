@@ -13,6 +13,7 @@ export const getAllJobs = async (req, res) => {
     queryObject.$or = [
       { position: { $regex: search, $options: "i" } },
       { company: { $regex: search, $options: "i" } },
+      { jobLocation: { $regex: search, $options: "i" } },
     ];
   }
 

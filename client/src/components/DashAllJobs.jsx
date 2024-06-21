@@ -1,6 +1,7 @@
 import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import JobCard from "./JobCard";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 function DashAllJobs() {
   const [filterData, setFilterData] = useState({
@@ -13,6 +14,10 @@ function DashAllJobs() {
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [paginationNums, setPaginationNums] = useState({
+    start: null,
+    end: null,
+  });
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,6 +31,15 @@ function DashAllJobs() {
       if (res.ok) {
         const data = await res.json();
         setJobs(data);
+
+        setPaginationNums({
+          start: data.currentPage * 5 - 5 + 1,
+          end:
+            data.currentPage * 5 > data.totalJobs
+              ? data.totalJobs
+              : data.currentPage * 5,
+        });
+
         setLoading(false);
       }
     };
@@ -34,19 +48,19 @@ function DashAllJobs() {
 
   const handleChange = (e) => {
     if (e.target.id === "search") {
-      setFilterData({ ...filterData, search: e.target.value });
+      setFilterData({ ...filterData, search: e.target.value, page: 1 });
     }
     if (e.target.id === "sort") {
       const sort = e.target.value || "newest";
-      setFilterData({ ...filterData, sort: sort });
+      setFilterData({ ...filterData, sort: sort, page: 1 });
     }
     if (e.target.id === "jobStatus") {
       const jobStatus = e.target.value || "all";
-      setFilterData({ ...filterData, jobStatus: jobStatus });
+      setFilterData({ ...filterData, jobStatus: jobStatus, page: 1 });
     }
     if (e.target.id === "jobType") {
       const jobType = e.target.value || "all";
-      setFilterData({ ...filterData, jobType: jobType });
+      setFilterData({ ...filterData, jobType: jobType, page: 1 });
     }
   };
 
@@ -59,6 +73,28 @@ function DashAllJobs() {
       sort: "newest",
       page: 1,
     });
+  };
+
+  const handlePaginationDecrease = () => {
+    if (jobs.currentPage > 1) {
+      return setFilterData((prev) => ({
+        ...prev,
+        page: prev.page - 1,
+      }));
+    } else {
+      return;
+    }
+  };
+
+  const handlePaginationIncrease = () => {
+    if (jobs.currentPage < jobs.numOfPages) {
+      return setFilterData((prev) => ({
+        ...prev,
+        page: prev.page + 1,
+      }));
+    } else {
+      return;
+    }
   };
 
   return (
@@ -183,6 +219,32 @@ function DashAllJobs() {
           )}
         </div>
       </div>
+      {jobs.totalJobs > 0 ? (
+        <div className="flex justify-center">
+          <div className="flex items-center">
+            <p className="font-medium mr-5">
+              {" "}
+              {paginationNums.start} - {paginationNums.end} of {jobs.totalJobs}{" "}
+            </p>
+            <div className="flex">
+              <button
+                onClick={handlePaginationDecrease}
+                className="rounded-sm border-none py-2 mr-2 p-3 bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] text-white"
+              >
+                <FaAngleLeft />
+              </button>
+              <button
+                onClick={handlePaginationIncrease}
+                className="rounded-sm border-none py-2 mr-2 p-3 bg-[linear-gradient(to_bottom_left,#7b507e,#4b2255)] hover:bg-[linear-gradient(to_top_right,#7b507e,#4b2255)] text-white"
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
