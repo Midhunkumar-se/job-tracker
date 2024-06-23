@@ -69,7 +69,7 @@ const DashStats = () => {
             type="button"
             onClick={() => setBarChart(!barChart)}
           >
-            {barChart ? "Area Chart" : "Bar Chart"}
+            {barChart ? "Bar Chart" : "Area Chart"}
           </button>
           {barChart ? (
             <AreaChartComponent data={chartData} />

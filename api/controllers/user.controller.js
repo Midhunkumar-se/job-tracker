@@ -35,8 +35,6 @@ export const updateUser = async (req, res, next) => {
           "Username can only contain letters and numbers"
         );
       }
-    } else {
-      throw new BadRequestError("Username should not be empty");
     }
 
     const updatedUser = await User.findByIdAndUpdate(
