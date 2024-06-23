@@ -162,7 +162,7 @@ const DashProfile = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-3 w-full">
+    <div className="max-w-lg mx-auto p-3 w-full min-h-screen">
       <h1 className="my-7 text-center font-medium text-3xl">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
