@@ -39,10 +39,11 @@ export default function Dashboard() {
         {tab === "addJob" && <DashAddJob />}
         {/* Update Job... */}
         {tab === "updateJob" && jobId && <DashUpdateJob />}
+
         {/* users */}
         {tab === "allJobs" && <DashAllJobs />}
-        {/* comments  */}
-        {tab === "stats" && <DashStats />}
+        {/* job Stats  */}
+        {tab === "jobStats" && <DashStats />}
       </div>
     </>
   );

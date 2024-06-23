@@ -4,6 +4,7 @@ import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiUser } from "react-icons/hi";
 import { FaWpforms } from "react-icons/fa";
 import { MdQueryStats } from "react-icons/md";
+import { IoBarChartSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -57,6 +58,15 @@ export default function DashSidebar() {
               as="div"
             >
               All Jobs
+            </Sidebar.Item>
+          </Link>
+          <Link to="/dashboard?tab=jobStats">
+            <Sidebar.Item
+              active={tab === "jobStats"}
+              icon={IoBarChartSharp}
+              as="div"
+            >
+              Stats
             </Sidebar.Item>
           </Link>
           <Link to="/dashboard?tab=profile">
