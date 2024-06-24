@@ -57,7 +57,11 @@ function Header() {
               {currentUser.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+          <Dropdown.Item>
+            <button className="bg-transparent" onClick={handleLogout}>
+              Logout
+            </button>{" "}
+          </Dropdown.Item>
         </Dropdown>
       </div>
     </Navbar>

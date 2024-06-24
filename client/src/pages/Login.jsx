@@ -111,6 +111,15 @@ function Login() {
           <></>
         )}
       </div>
+      <div className="p-3 w-[320px]  shadow-2xl rounded-md mt-4 bg-white">
+        <h1 className="font-medium">Demo User:</h1>
+        <p>
+          <span className="font-medium">Email:</span> midhun@gmail.com
+        </p>
+        <p>
+          <span className="font-medium">Password:</span> 123456
+        </p>
+      </div>
     </div>
   );
 }
