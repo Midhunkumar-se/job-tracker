@@ -28,7 +28,7 @@ function Header() {
   };
 
   return (
-    <Navbar className="shadow-sm bg-slate-100">
+    <Navbar className="shadow-sm">
       <Link to="/">
         <div className="max-w-[1200px] m-auto p-2.5 pl-5">
           <img src={logo} className="w-[170px] h-[30px]" />
