@@ -9,6 +9,10 @@
   font-family: "Rubik";
 }
 
+body{
+  background-color: rgb(244, 242, 242);
+}
+
 .main-heading {
   @apply font-semibold text-5xl pb-5 md:text-7xl;
   background: -webkit-linear-gradient(#c0a7c2, #4b2255);
