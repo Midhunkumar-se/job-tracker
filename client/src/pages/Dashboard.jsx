@@ -28,7 +28,7 @@ export default function Dashboard() {
   return (
     <>
       <Header />
-      <div className="h-full flex flex-col md:flex-row ">
+      <div className="h-full flex flex-col md:flex-row bg-slate-300">
         <div className="md:w-56">
           {/* Sidebar */}
           <DashSidebar />
